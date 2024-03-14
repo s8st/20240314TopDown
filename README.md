@@ -8,10 +8,10 @@
 ```mermaid
 %% TD : topdown, LR : left right%%
 graph LR;  
-    PlayerInputController.cs==>TopDownMovement.cs;
-    PlayerInputController.cs-->TopDownCharacterController.cs;
-TopDownCharacterController.cs-->TopDownAimRotation.cs 
-    TopDownCharacterController.cs-->TopDownMovement.cs;
+    PlayerInputController.cs==>TopDownMovement.cs  
+    PlayerInputController.cs-->TopDownCharacterController.cs  
+TopDownCharacterController.cs-..->TopDownAimRotation.cs   
+    TopDownCharacterController.cs-->TopDownMovement.cs  
 ```
 
 PlayerInputController.cs  
