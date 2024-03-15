@@ -7,8 +7,12 @@ using UnityEngine.InputSystem;
 public class PlayerInputController : TopDownCharacterController
 {
     private Camera _camera;
-    private void Awake()
+
+    //private void Awake()
+    protected override void Awake()
     {
+        //부모의 것을 먼저 실행하게
+        base.Awake();
         _camera = Camera.main;
     }
 
