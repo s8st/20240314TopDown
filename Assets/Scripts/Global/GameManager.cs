@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public Transform Player { get; private set; }
     [SerializeField] private string playerTag = "Player";
 
-  //  private HealthSystem playerHealthSystem;
+    private HealthSystem playerHealthSystem;
 
     [SerializeField] private TextMeshProUGUI waveText; //using TMPro;
     [SerializeField] private Slider hpGaugeSlider;  //using UnityEngine.UI;
@@ -44,10 +44,10 @@ public class GameManager : MonoBehaviour
         // 매 프레임 실행하는 Update에서는 사용하지 않는다, 한번만 사용할때
         Player = GameObject.FindGameObjectWithTag(playerTag).transform;
 
-        //playerHealthSystem = Player.GetComponent<HealthSystem>();
-        //playerHealthSystem.OnDamage += UpdateHealthUI;
-        //playerHealthSystem.OnHeal += UpdateHealthUI;
-        //playerHealthSystem.OnDeath += GameOver;
+        playerHealthSystem = Player.GetComponent<HealthSystem>();
+        playerHealthSystem.OnDamage += UpdateHealthUI;
+        playerHealthSystem.OnHeal += UpdateHealthUI;
+        playerHealthSystem.OnDeath += GameOver;
 
         gameOverUI.SetActive(false);
 
@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour
                     {
                         int prefabIdx = Random.Range(0, enemyPrefebs.Count);
                         GameObject enemy = Instantiate(enemyPrefebs[prefabIdx], spawnPostions[posIdx].position, Quaternion.identity);
-                   //     enemy.GetComponent<HealthSystem>().OnDeath += OnEnemyDeath;
+                       enemy.GetComponent<HealthSystem>().OnDeath += OnEnemyDeath;
 
                         //몬스터를 생성할 때 지워줘야
                         enemy.GetComponent<CharacterStatsHandler>().AddStatModifier(defaultStats);
@@ -142,7 +142,7 @@ public class GameManager : MonoBehaviour
     private void UpdateHealthUI()
     {
         // 퍼센트로 만들기 위해 --> 0~1 value
-    //    hpGaugeSlider.value = playerHealthSystem.CurrentHealth / playerHealthSystem.MaxHealth;
+        hpGaugeSlider.value = playerHealthSystem.CurrentHealth / playerHealthSystem.MaxHealth;
     }
 
 
