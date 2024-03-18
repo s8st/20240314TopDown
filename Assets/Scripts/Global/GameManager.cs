@@ -220,7 +220,7 @@ public class GameManager : MonoBehaviour
                 break;
 
             case 5:
-                RangedAttackData rangedAttackData = rangedStats.attackSO as RangedAttackData; // as°¡ ¹¹¿´´õ¶ó??
+                RangedAttackData rangedAttackData = rangedStats.attackSO as RangedAttackData; 
                 rangedAttackData.numberofProjectilesPerShot += 1;
                 break;
 

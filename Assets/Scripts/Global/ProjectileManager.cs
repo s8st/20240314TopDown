@@ -44,7 +44,7 @@ public class ProjectileManager : MonoBehaviour
         ParticleSystem.EmissionModule em = _impactParticleSystem.emission;
         em.SetBurst(0, new ParticleSystem.Burst(0, Mathf.Ceil(attackData.size * 5)));
         ParticleSystem.MainModule mainModule = _impactParticleSystem.main;
-        mainModule.startSpeedMultiplier = attackData.size * 10f; //사이즈에 비례하게
+        mainModule.startSpeedMultiplier = attackData.size * 10f; //사이즈에 비례하게  
         _impactParticleSystem.Play();
     }
 
