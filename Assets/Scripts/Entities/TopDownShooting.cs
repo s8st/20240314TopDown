@@ -67,9 +67,9 @@ public class TopDownShooting : MonoBehaviour
           RotateVector2(_aimDirection, angle),
           rangedAttackData);
 
-        // shootingClip있으면 오디오클립 실행시켜라
-        //if (shootingClip)
-        //    SoundManager.PlayClip(shootingClip);
+      //  shootingClip있으면 오디오클립 실행시켜라
+        if (shootingClip)
+            SoundManager.PlayClip(shootingClip);
     }
 
 

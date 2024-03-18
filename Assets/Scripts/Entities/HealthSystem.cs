@@ -75,8 +75,8 @@ public class HealthSystem : MonoBehaviour
             OnDamage?.Invoke();
 
             // 오디오클립이 있을때만 플레이
-            //if (damageClip)
-            //    SoundManager.PlayClip(damageClip);
+            if (damageClip)
+                SoundManager.PlayClip(damageClip);
 
         }
 
