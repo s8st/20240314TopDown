@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 6
-  m_Sprite: {fileID: 21300000, guid: 776f68ac1208458449b6d13e04cb6de1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cc96aaa6e9f964a4380bd915f943e1cd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 5240696370477472719}
   - component: {fileID: 4733384390931460205}
   m_Layer: 0
-  m_Name: Arrow
+  m_Name: Arrow1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -233,9 +233,9 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 6
   m_Time: 0.1
-  m_PreviewTimeScale: 1
+  m_PreviewTimeScale: 0
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -265,7 +265,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0, g: 0.053248882, b: 1, a: 1}
+      key0: {r: 1, g: 0.020098902, b: 0, a: 1}
       key1: {r: 0.029804707, g: 0, b: 1, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
