@@ -62,24 +62,24 @@ public class RangedAttackController : MonoBehaviour
             // - _direction * .2f : 부딪친 곳에서 조금 안쪽으로
             DestroyProjectile(collision.ClosestPoint(transform.position) - _direction * .2f, fxOnDestory);
         }
-        //else if (/*타겟으로 잡은 객체*/_attackData.target.value/*레이어 마스크*/ == (_attackData.target.value | (1 << collision.gameObject.layer)))
-        //{
-        //    HealthSystem healthSystem = collision.GetComponent<HealthSystem>(); //충돌체의 헬스시스템
-        //    if (healthSystem != null) // 충돌체가 안가지고 있으면
-        //    {
-        //        healthSystem.ChangeHealth(-_attackData.power); // 어택데미지에 파워??
-        //        if (_attackData.isOnKnockback)
-        //        {
-        //            TopDownMovement movement = collision.GetComponent<TopDownMovement>();
-        //            if (movement != null)
-        //            {
-        //                // 힘과 거리 제공??
-        //                movement.ApplyKnockback(transform, _attackData.knockbackPower, _attackData.knockbackTime);
-        //            }
-        //        }
-        //    }
-        //    DestroyProjectile(collision.ClosestPoint(transform.position), fxOnDestory);
-        //}
+        else if (/*타겟으로 잡은 객체*/_attackData.target.value/*레이어 마스크*/ == (_attackData.target.value | (1 << collision.gameObject.layer)))
+        {
+            HealthSystem healthSystem = collision.GetComponent<HealthSystem>(); //충돌체의 헬스시스템
+            if (healthSystem != null) // 충돌체가 안가지고 있으면
+            {
+                healthSystem.ChangeHealth(-_attackData.power); // 어택데미지에 파워??
+                if (_attackData.isOnKnockback)
+                {
+                    TopDownMovement movement = collision.GetComponent<TopDownMovement>();
+                    if (movement != null)
+                    {
+                        // 힘과 거리 제공??
+                        movement.ApplyKnockback(transform, _attackData.knockbackPower, _attackData.knockbackTime);
+                    }
+                }
+            }
+            DestroyProjectile(collision.ClosestPoint(transform.position), fxOnDestory);
+        }
 
     }
 

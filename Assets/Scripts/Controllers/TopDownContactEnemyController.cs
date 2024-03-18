@@ -11,16 +11,16 @@ public class TopDownContactEnemyController : TopDownEnemyController
     [SerializeField] private SpriteRenderer characterRenderer;
 
 
-  //  private HealthSystem healthSystem;
- //   private HealthSystem _collidingTargetHealthSystem;
+    private HealthSystem healthSystem;
+    private HealthSystem _collidingTargetHealthSystem;
     private TopDownMovement _collidingMovement;
 
     protected override void Start()
     {
         base.Start();// 부모의 함수부터 실행
 
-        //healthSystem = GetComponent<HealthSystem>();
-        //healthSystem.OnDamage += OnDamage;
+        healthSystem = GetComponent<HealthSystem>();
+        healthSystem.OnDamage += OnDamage;
 
     }
 
@@ -66,12 +66,12 @@ public class TopDownContactEnemyController : TopDownEnemyController
             return;
         }
 
-        //_collidingTargetHealthSystem = receiver.GetComponent<HealthSystem>();
-        //if (_collidingTargetHealthSystem != null)
-        //{
-        //    // 타겟이 있으면 true로
-        //    _isCollidingWithTarget = true;
-        //}
+        _collidingTargetHealthSystem = receiver.GetComponent<HealthSystem>();
+        if (_collidingTargetHealthSystem != null)
+        {
+            // 타겟이 있으면 true로
+            _isCollidingWithTarget = true;
+        }
 
         _collidingMovement = receiver.GetComponent<TopDownMovement>();
     }
@@ -90,7 +90,7 @@ public class TopDownContactEnemyController : TopDownEnemyController
     private void ApplyHealthChange()
     {
         AttackSO attackSO = Stats.CurrentStats.attackSO;
-      //  bool hasBeenChanged = _collidingTargetHealthSystem.ChangeHealth(-attackSO.power/*+를 주면 회복해 버린다*/);
+        bool hasBeenChanged = _collidingTargetHealthSystem.ChangeHealth(-attackSO.power/*+를 주면 회복해 버린다*/);
         if (attackSO.isOnKnockback && _collidingMovement != null)
         {
             _collidingMovement.ApplyKnockback(transform, attackSO.knockbackPower, attackSO.knockbackTime);

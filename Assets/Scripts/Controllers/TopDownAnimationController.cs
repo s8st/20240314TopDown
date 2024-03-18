@@ -10,12 +10,12 @@ public class TopDownAnimationController : TopDownAnimations
     private static readonly int Attack = Animator.StringToHash("Attack");
     private static readonly int IsHit = Animator.StringToHash("IsHit");
 
-   // private HealthSystem _healthSystem;
+    private HealthSystem _healthSystem;
 
     protected override /*base.Awake()*/ void Awake()
     {
         base.Awake();
-   //     _healthSystem = GetComponent<HealthSystem>();
+       _healthSystem = GetComponent<HealthSystem>();
     }
 
     // Start is called before the first frame update
@@ -24,11 +24,11 @@ public class TopDownAnimationController : TopDownAnimations
         controller.OnAttackEvent += Attacking;
         controller.OnMoveEvent += Move;
 
-        //if (_healthSystem != null)
-        //{
-        //    _healthSystem.OnDamage += Hit; // 빨간색의 공격당해 아픈 모습
-        //    _healthSystem.OnInvincibilityEnd += InvincibilityEnd; // 풀리는 모습
-        //}
+        if (_healthSystem != null)
+        {
+            _healthSystem.OnDamage += Hit; // 빨간색의 공격당해 아픈 모습
+            _healthSystem.OnInvincibilityEnd += InvincibilityEnd; // 풀리는 모습
+        }
 
     }
 

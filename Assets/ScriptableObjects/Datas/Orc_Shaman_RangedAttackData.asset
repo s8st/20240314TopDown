@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eb1725d543545845a535e1144c97bc8, type: 3}
   m_Name: Orc_Shaman_RangedAttackData
   m_EditorClassIdentifier: 
-  size: 0.5
+  size: 1
   delay: 1
   power: 1
   speed: 10
@@ -22,7 +22,7 @@ MonoBehaviour:
   isOnKnockback: 1
   knockbackPower: 5
   knockbackTime: 0.1
-  bulletNameTag: Arrow
+  bulletNameTag: Arrow1
   duration: 5
   spread: 4
   numberofProjectilesPerShot: 1
