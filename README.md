@@ -17,8 +17,12 @@ https://www.youtube.com/watch?v=6sBNPvxjyt0
 
 
 
-//힐을 더 회복하게 만들어 준다
-PickupHeal : PickupItem    
+
+---  
+
+
+ //힐을 더 회복하게 만들어 준다
+PickupHeal : PickupItem   
          _healthSystem = receiver.GetComponent<HealthSystem>();
         _healthSystem.ChangeHealth(healValue);
     
@@ -82,6 +86,154 @@ public class HealthSystem : MonoBehaviour
     public bool ChangeHealth(float change)
         private void CallDeath()
   
+
+
+
+
+
+
+// 원거리 공격 몬스터의 공격 판단 
+public class TopDownRangeEnemyContreoller : TopDownEnemyController
+
+    protected override void FixedUpdate()
+
+
+
+
+
+
+
+// 근접 몬스터 공격 판단, 공격받으면 추격거리를 100으로 확장, 공격할 때 넉백 적용
+public class TopDownContactEnemyController : TopDownEnemyController
+
+    private void OnDamage()
+  
+
+    protected override void FixedUpdate()
+ 
+
+    private void Rotate(Vector2 direction)
+   
+
+    private void OnTriggerEnter2D(Collider2D collision)
+      
+    // 충돌 여부 체크
+    private void OnTriggerExit2D(Collider2D collision)
+   
+    // 넉백 적용	
+    private void ApplyHealthChange()
+   
+
+
+
+
+
+
+// 코루틴으로  몬스터 발생시키기, 웨이브 증가, 몬스터 랜덤 업그레이드, 아이템 보상 생성
+// 체력UI,게임오버,업데이트웨이브UI,다시시작하기,게임 나가기
+public class GameManager : MonoBehaviour
+
+       UpgradeStatInit();
+       StartCoroutine("StartNextWave"); 
+        
+    IEnumerator StartNextWave()
+   
+    private void OnEnemyDeath()
+   
+    private void UpdateHealthUI()
+    
+
+    private void GameOver()
+  
+    private void UpdateWaveUI()
+   
+    public void RestartGame()
+  
+    public void ExitGame()
+   
+    void CreateReward()
+ 
+    //스탯 초기화
+    void UpgradeStatInit()
+  
+    void RandomUpgrade()
+   
+        
+
+
+
+
+
+// 거리와 방향 게산
+public class TopDownEnemyController : TopDownCharacterController
+   
+    protected float DistanceToTarget()
+     protected Vector2 DirectionToTarget()
+  
+
+
+
+
+// 애니메이션 설정 : 걷기,공격,피격 시 에니메이터의 값 조정
+public class TopDownAnimationController : TopDownAnimations
+
+    private void Move(Vector2 obj)
+   
+    private void Attacking(AttackSO obj)
+    
+    private void Hit()
+  
+
+    private void InvincibilityEnd()
+ 
+
+
+
+// TopDownAnimationController 에서 상속받아서 사용
+public class TopDownAnimations : MonoBehaviour
+
+         animator = GetComponentInChildren<Animator>();
+        controller = GetComponent<TopDownCharacterController>();
+    
+
+
+
+// 구조체 Pool의 필드를 가지는 Dictionary<string, Queue<GameObject>>를 계속 생성시키기
+public class ObjectPool : MonoBehaviour
+{
+   
+    public struct Pool
+ 
+    public GameObject SpawnFromPool(string tag)
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
