@@ -4,7 +4,8 @@
 
 #0319  
 
-- 조이스틱 달기 --> 모바일에서 사용할 수 있게
+- 조이스틱 달기 --> 모바일에서 사용할 수 있게 
+  -   ---> 조이스틱 만들기는 가능한데 조준이 안되는 문제
 - https://www.youtube.com/watch?v=O5Qvq4dypOg&list=PLO-mt5Iu5TeZF8xMHqtT_DhAPKmjF6i3x&index=22
 - 스크립트 목록 정리하기
 - 폴더에 넣고 연결하기
