@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Unity.VisualScripting;
 
 
 public class CharacterStatsHandler : MonoBehaviour
@@ -48,9 +49,9 @@ public class CharacterStatsHandler : MonoBehaviour
             attackSO = Instantiate(baseStats.attackSO); // 먼저 내 베이스에 있는 것을 넣기
         }
 
-        CurrentStats = new CharacterStats { attackSO = attackSO };
+        CurrentStats = new CharacterStats { attackSO = attackSO }; //public CharacterStats CurrentStats { get; private set; }
         // TODO
-        CurrentStats.statsChangeType = baseStats.statsChangeType;
+        CurrentStats.statsChangeType = baseStats.statsChangeType; // public enum StatsChangeType { Add, Multiple, Override}
         CurrentStats.maxHealth = baseStats.maxHealth;
         CurrentStats.speed = baseStats.speed;
         //baseStats을 커렌트에 

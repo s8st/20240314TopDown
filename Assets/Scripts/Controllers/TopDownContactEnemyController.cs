@@ -60,7 +60,7 @@ public class TopDownContactEnemyController : TopDownEnemyController
         GameObject receiver = collision.gameObject;
 
         //충돌한 물체가 타겟의 태그를 가지고 있는지 확인
-        if (!receiver.CompareTag(targetTag))
+        if (!receiver.CompareTag(targetTag)) // [SerializeField] private string targetTag = "Player";
         {
             // 없으면 그냥 리턴
             return;
@@ -90,7 +90,7 @@ public class TopDownContactEnemyController : TopDownEnemyController
     private void ApplyHealthChange()
     {
         AttackSO attackSO = Stats.CurrentStats.attackSO;
-        bool hasBeenChanged = _collidingTargetHealthSystem.ChangeHealth(-attackSO.power/*+를 주면 회복해 버린다*/);
+        bool hasBeenChanged = _collidingTargetHealthSystem.ChangeHealth(-attackSO.power/*+를 주면 회복해 버린다*/); // ?어디에 사용되는지 ??
         if (attackSO.isOnKnockback && _collidingMovement != null)
         {
             _collidingMovement.ApplyKnockback(transform, attackSO.knockbackPower, attackSO.knockbackTime);
