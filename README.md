@@ -210,6 +210,162 @@ public class ObjectPool : MonoBehaviour
 
 
 
+// 델리게이트로 이동, 보는 방향, 공격 연결
+public class TopDownCharacterController : MonoBehaviour
+{
+   
+
+  
+        HandleAttackDelay();
+ 
+    
+    public void CallMoveEvent(Vector2 direction)
+  
+
+    public void CallLookEvent(Vector2 direction)
+  
+
+    public void CallAttackEvent(AttackSO attackSO)
+   
+
+
+
+
+
+
+// 원거리 공격시 발사체의 충돌과 삭제,데미지로 체력 깎기,발사체의 색, 파티클 fx 통제
+public class RangedAttackController : MonoBehaviour
+   
+    private void OnTriggerEnter2D(Collider2D collision)
+  
+            DestroyProjectile(collision.ClosestPoint(transform.position), fxOnDestory);
+    
+    public void InitializeAttack(Vector2 direction, RangedAttackData attackData, ProjectileManager projectileManager)
+  
+
+    private void UpdateProjectilSprite()
+ 
+    private void DestroyProjectile(Vector3 position, bool createFx)
+ 
+            _projectileManager.CreateImpactParticlesAtPostion(position, _attackData);
+      
+        gameObject.SetActive(false); 
+
+
+
+
+
+// 발사체 사용 준비, 발사체 파티클이펙트
+public class ProjectileManager : MonoBehaviour
+{
+
+    public void ShootBullet(Vector2 startPostiion, Vector2 direction, RangedAttackData attackData)
+
+  
+    public void CreateImpactParticlesAtPostion(Vector3 position, RangedAttackData attackData)
+
+
+
+
+
+
+
+
+// 이건 다시 한번 강의를 참고하기
+public class CharacterStatsHandler : MonoBehaviour
+
+    private void Awake()
+    {
+        UpdateCharacterStats();
+    }
+
+    public void AddStatModifier(CharacterStats statModifier)
+    {
+        statsModifiers.Add(statModifier);
+        UpdateCharacterStats();
+    }
+
+    public void RemoveStatModifier(CharacterStats statModifier)
+    {
+        statsModifiers.Remove(statModifier);
+        UpdateCharacterStats();
+    }
+
+    private void UpdateCharacterStats()
+   
+ 
+    private void UpdateStats(Func<float, float, float> operation, CharacterStats newModifier)
+ 
+
+    private void UpdateAttackStats(Func<float, float, float> operation, AttackSO currentAttack, AttackSO newAttack)
+ 
+
+    private void ApplyRangedStats(Func<float, float, float> operation, CharacterStats newModifier)
+   
+
+    private Color UpdateColor(Func<float, float, float> operation, Color currentColor, Color newColor)
+  
+
+    private void LimitStats(ref float stat, float minVal)
+  
+
+    private void LimitAllStats()
+
+
+
+
+
+// 원거리 공격 데이터 + 일반 공격 데이터 상속
+[CreateAssetMenu(fileName = "RangedAttackData", menuName = "TopDownController/Attacks/Ranged", order = 1)]
+public class RangedAttackData : AttackSO
+
+
+
+
+// 일반 공격 데이터
+[CreateAssetMenu(fileName = "DefaultAttackData", menuName = "TopDownController/Attacks/Default", order = 0)]
+public class AttackSO : ScriptableObject
+
+
+
+
+//케릭터 스탯 설정 ---> CharacterStatsHandler ---> 플레이어에 스크립트 연결
+public enum StatsChangeType {    Add,    Multiple,    Override,}
+
+[Serializable]
+public class CharacterStats
+
+
+
+// 발사체 발사, 발사시 오디오클립 재생
+public class TopDownShooting : MonoBehaviour
+
+  
+
+    private void OnShoot(AttackSO attackSO)
+
+
+    private void CreateProjectile(RangedAttackData rangedAttackData, float angle)
+  
+            SoundManager.PlayClip(shootingClip);
+ 
+
+
+
+
+
+// 마우스 방향으로 케릭터와 무기의 방향 전환
+public class TopDownAimRotation : MonoBehaviour
+
+    public void OnAim(Vector2 newAimDirection)
+    {
+        RotateArm(newAimDirection);
+    }
+
+    private void RotateArm(Vector2 direction)
+ 
+
+
 
 
 
