@@ -21,13 +21,15 @@ https://www.youtube.com/watch?v=6sBNPvxjyt0
 ---  
 
 
- //힐을 더 회복하게 만들어 준다
-PickupHeal : PickupItem   
+- 힐을 더 회복하게 만들어 준다  
+```cs
+  PickupHeal : PickupItem   
          _healthSystem = receiver.GetComponent<HealthSystem>();
         _healthSystem.ChangeHealth(healValue);
-    
+   ``` 
 
-// OnPickedUp구현하고 아이템을 먹으면 stat에 설정된 만큼 추가
+- OnPickedUp구현하고 아이템을 먹으면 stat에 설정된 만큼 추가  
+```cs
 PickupStatModifiers : PickupItem
 {
     [SerializeField] private List<CharacterStats> statsModifier;
@@ -37,73 +39,80 @@ PickupStatModifiers : PickupItem
         foreach (CharacterStats stat in statsModifier)
         {
             statsHandler.AddStatModifier(stat);
-     
+  ```   
 
-// 먹을 수 있는 아이템인지 검사, 집으면 삭제하고 소리나게 하고 파괴
-public abstract class PickupItem : MonoBehaviour
- 
-    protected abstract void OnPickedUp(GameObject receiver);
-
-
+- 먹을 수 있는 아이템인지 검사, 집으면 삭제하고 소리나게 하고 파괴
+  
+       public abstract class PickupItem : MonoBehaviour  
+       protected abstract void OnPickedUp(GameObject receiver);
 
 
-// 소리 등록하고 재생하고 끄기
-public class SoundSource : MonoBehaviour
 
+
+- 소리 등록하고 재생하고 끄기
+```cs
+  
+       public class SoundSource : MonoBehaviour
        public void Play(AudioClip clip, float soundEffectVolume, float soundEffectPitchVariance)
-   
+```   
 
 
-// 배경음악 재생, 오브젝트풀로 만들기
+- 배경음악 재생, 오브젝트풀로 만들기  
+```  
 public class SoundManager : MonoBehaviour
    
         ChangeBackGroundMusic(musicClip);
          public static void PlayClip(AudioClip clip)
    
+```
 
-
-// 걸을 때 에니메이션 이벤트에 연결하기, 발바닥에 먼지 파티클 효과
+- 걸을 때 에니메이션 이벤트에 연결하기, 발바닥에 먼지 파티클 효과
+```
 public class DustParticleControl : MonoBehaviour
 
     public void CreateDustParticles()
 
+```
 
 
 
-
-// 죽으면 벡터 제로, 투명도를 30%, 2초후 삭제
+- 죽으면 벡터 제로, 투명도를 30%, 2초후 삭제
+```
 public class DisappearOnDeath : MonoBehaviour
 
     void OnDeath()
-    
+```    
 
 
 
 
-//  데미지 받을때 오디오클립 재생, 힐 받으면 체력 증가, 데미지 받으면 체력 감소,체력 0이면 OnDeath
+- 데미지 받을때 오디오클립 재생, 힐 받으면 체력 증가, 데미지 받으면 체력 감소,체력 0이면 OnDeath
+```
 public class HealthSystem : MonoBehaviour
 
     public bool ChangeHealth(float change)
         private void CallDeath()
   
 
+```
 
 
 
 
-
-// 원거리 공격 몬스터의 공격 판단 
+- 원거리 공격 몬스터의 공격 판단 
+```
 public class TopDownRangeEnemyContreoller : TopDownEnemyController
 
     protected override void FixedUpdate()
+```
 
 
 
 
 
 
-
-// 근접 몬스터 공격 판단, 공격받으면 추격거리를 100으로 확장, 공격할 때 넉백 적용
+- 근접 몬스터 공격 판단, 공격받으면 추격거리를 100으로 확장, 공격할 때 넉백 적용
+```
 public class TopDownContactEnemyController : TopDownEnemyController
 
     private void OnDamage()
@@ -123,14 +132,15 @@ public class TopDownContactEnemyController : TopDownEnemyController
     // 넉백 적용	
     private void ApplyHealthChange()
    
+```
 
 
 
 
 
-
-// 코루틴으로  몬스터 발생시키기, 웨이브 증가, 몬스터 랜덤 업그레이드, 아이템 보상 생성
-// 체력UI,게임오버,업데이트웨이브UI,다시시작하기,게임 나가기
+- 코루틴으로  몬스터 발생시키기, 웨이브 증가, 몬스터 랜덤 업그레이드, 아이템 보상 생성
+- 체력UI,게임오버,업데이트웨이브UI,다시시작하기,게임 나가기
+```
 public class GameManager : MonoBehaviour
 
        UpgradeStatInit();
@@ -157,24 +167,26 @@ public class GameManager : MonoBehaviour
     void UpgradeStatInit()
   
     void RandomUpgrade()
-   
+```   
         
 
 
 
 
 
-// 거리와 방향 게산
+- 거리와 방향 계산  
+```
 public class TopDownEnemyController : TopDownCharacterController
    
     protected float DistanceToTarget()
      protected Vector2 DirectionToTarget()
-  
+```  
 
 
 
 
-// 애니메이션 설정 : 걷기,공격,피격 시 에니메이터의 값 조정
+- 애니메이션 설정 : 걷기,공격,피격 시 에니메이터의 값 조정
+```
 public class TopDownAnimationController : TopDownAnimations
 
     private void Move(Vector2 obj)
@@ -185,20 +197,22 @@ public class TopDownAnimationController : TopDownAnimations
   
 
     private void InvincibilityEnd()
- 
+ ```
 
 
 
-// TopDownAnimationController 에서 상속받아서 사용
+- TopDownAnimationController 에서 상속받아서 사용
+```
 public class TopDownAnimations : MonoBehaviour
 
          animator = GetComponentInChildren<Animator>();
         controller = GetComponent<TopDownCharacterController>();
     
+```
 
 
-
-// 구조체 Pool의 필드를 가지는 Dictionary<string, Queue<GameObject>>를 계속 생성시키기
+- 구조체 Pool의 필드를 가지는 Dictionary<string, Queue<GameObject>>를 계속 생성시키기
+```
 public class ObjectPool : MonoBehaviour
 {
    
@@ -206,16 +220,14 @@ public class ObjectPool : MonoBehaviour
  
     public GameObject SpawnFromPool(string tag)
   
+```
 
 
 
-
-// 델리게이트로 이동, 보는 방향, 공격 연결
+- 델리게이트로 이동, 보는 방향, 공격 연결
+```
 public class TopDownCharacterController : MonoBehaviour
-{
-   
-
-  
+ 
         HandleAttackDelay();
  
     
@@ -227,13 +239,14 @@ public class TopDownCharacterController : MonoBehaviour
 
     public void CallAttackEvent(AttackSO attackSO)
    
+```
 
 
 
 
 
-
-// 원거리 공격시 발사체의 충돌과 삭제,데미지로 체력 깎기,발사체의 색, 파티클 fx 통제
+- 원거리 공격시 발사체의 충돌과 삭제,데미지로 체력 깎기,발사체의 색, 파티클 fx 통제
+```
 public class RangedAttackController : MonoBehaviour
    
     private void OnTriggerEnter2D(Collider2D collision)
@@ -251,18 +264,20 @@ public class RangedAttackController : MonoBehaviour
       
         gameObject.SetActive(false); 
 
+```
 
 
 
-
-// 발사체 사용 준비, 발사체 파티클이펙트
+- 발사체 사용 준비, 발사체 파티클이펙트
+```
 public class ProjectileManager : MonoBehaviour
-{
+
 
     public void ShootBullet(Vector2 startPostiion, Vector2 direction, RangedAttackData attackData)
 
   
     public void CreateImpactParticlesAtPostion(Vector3 position, RangedAttackData attackData)
+```
 
 
 
@@ -270,8 +285,8 @@ public class ProjectileManager : MonoBehaviour
 
 
 
-
-// 이건 다시 한번 강의를 참고하기
+- **이건 다시 한번 강의를 참고하기**
+```
 public class CharacterStatsHandler : MonoBehaviour
 
     private void Awake()
@@ -311,33 +326,38 @@ public class CharacterStatsHandler : MonoBehaviour
 
     private void LimitAllStats()
 
+```
 
 
 
+- 원거리 공격 데이터 + 일반 공격 데이터 상속  
+```
 
-// 원거리 공격 데이터 + 일반 공격 데이터 상속
 [CreateAssetMenu(fileName = "RangedAttackData", menuName = "TopDownController/Attacks/Ranged", order = 1)]
 public class RangedAttackData : AttackSO
+```
 
 
 
-
-// 일반 공격 데이터
+- 일반 공격 데이터
+```
 [CreateAssetMenu(fileName = "DefaultAttackData", menuName = "TopDownController/Attacks/Default", order = 0)]
 public class AttackSO : ScriptableObject
 
+```
 
 
-
-//케릭터 스탯 설정 ---> CharacterStatsHandler ---> 플레이어에 스크립트 연결
+- 케릭터 스탯 설정 ---> CharacterStatsHandler ---> 플레이어에 스크립트 연결
+```
 public enum StatsChangeType {    Add,    Multiple,    Override,}
 
 [Serializable]
 public class CharacterStats
 
+```
 
-
-// 발사체 발사, 발사시 오디오클립 재생
+- 발사체 발사, 발사시 오디오클립 재생
+```
 public class TopDownShooting : MonoBehaviour
 
   
@@ -350,11 +370,12 @@ public class TopDownShooting : MonoBehaviour
             SoundManager.PlayClip(shootingClip);
  
 
+```
 
 
 
-
-// 마우스 방향으로 케릭터와 무기의 방향 전환
+- 마우스 방향으로 케릭터와 무기의 방향 전환
+```
 public class TopDownAimRotation : MonoBehaviour
 
     public void OnAim(Vector2 newAimDirection)
@@ -365,6 +386,48 @@ public class TopDownAimRotation : MonoBehaviour
     private void RotateArm(Vector2 direction)
  
 
+```
+
+
+- 플레이어 이동, 넉백  ---> PlayerInputController 
+```
+public class TopDownMovement : MonoBehaviour
+
+
+    private void Move(Vector2 direction)
+ 
+    public void ApplyKnockback(Transform other, float power, float duration)
+  
+
+
+    private void ApplyMovement(Vector2 direction)
+   
+```
+
+
+
+
+
+
+- PlayerInput(키보드와 마우스 등의 입력) ---> PlayerInputController 
+- 마우스와 키보드 입력 받는 스크립트 : 이동, 보는 방향, 발사
+```
+public class PlayerInputController : TopDownCharacterController
+
+    public void OnMove(InputValue value)
+   
+        CallMoveEvent(moveInput);
+  
+
+    public void OnLook(InputValue value)
+    
+            CallLookEvent(newAim);
+  
+    public void OnFire(InputValue value)
+         
+        IsAttacking = value.isPressed;
+
+```
 
 
 
